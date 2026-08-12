@@ -1,0 +1,19 @@
+flowchart TD
+  User(["Usuario"])
+  Librarian(["Bibliotecário"])
+
+  subgraph SB["Sistema da Biblioteca"]
+    App["App de Usuário"]
+    Backoffice["App do Bibliotecário"]
+    Server["API"]
+    BD[("Banco de Dados")]
+  end
+
+  Email["Serviço de e-mail"]
+
+  User --> | pesquisa e empresa | App
+  Librarian --> | Gerencia Livro | Backoffice
+  App --> | Chama API | Server
+  Backoffice --> | Chama API | Server
+  Server --> | Lê e grava | BD
+  Server --> | Monitora e notifica o prazo vencendo | Email

@@ -1,0 +1,9 @@
+flowchart LR
+  User(["Usuário<br>pesquisa e empresta livro"])
+  Librarian(["Bibliotecario<br>cadastra livro e gerencia empréstimo"])
+  System["Sistema de Bibliotecagem"]
+  Email["Serviço de e-mail"]
+
+  User --> |pesquisa e empresta| System
+  Librarian --> |cadastra e gerencia livro| System
+  System --> |notifica o usuário| Email
