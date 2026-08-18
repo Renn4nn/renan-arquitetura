@@ -1,0 +1,9 @@
+flowchart LR
+    User(["Usuário"])
+    WebApp["Interface Web<br>(Frontend)"]
+    API["API de Aplicação<br>(Backend)"]
+    DB[("Banco de Dados<br>(Dados do Sistema)")]
+
+    User --> |"Interage através do navegador"| WebApp
+    WebApp --> |"Envia requisições"| API
+    API --> |"Consulta/Salva informações"| DB

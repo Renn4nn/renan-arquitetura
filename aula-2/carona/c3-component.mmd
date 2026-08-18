@@ -1,0 +1,9 @@
+flowchart LR
+    UI["Página de Cadastro/Gestão"]
+    Auth["Módulo de Autenticação"]
+    CRUD["Módulo de Processamento de Dados"]
+    Report["Módulo de Relatórios"]
+
+    UI --> |"Valida sessão"| Auth
+    UI --> |"Solicita operações"| CRUD
+    CRUD --> |"Gera dados para"| Report

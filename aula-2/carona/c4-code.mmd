@@ -1,0 +1,17 @@
+classDiagram
+    class Usuario {
+        +int id
+        +string nome
+        +login()
+    }
+    class Sistema {
+        +gerenciarDados()
+        +gerarRelatorio()
+    }
+    class BancoDeDados {
+        +salvar()
+        +consultar()
+    }
+
+    Usuario --> Sistema
+    Sistema --> BancoDeDados

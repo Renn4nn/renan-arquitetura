@@ -1,0 +1,7 @@
+flowchart LR
+    User(["Usuário Final<br>(Cliente)"])
+    System["Sistema de Gerenciamento<br>(Software em Desenvolvimento)"]
+    External["Outros Sistemas<br>(Integrações Externas)"]
+
+    User --> |"Acessa e gerencia dados"| System
+    System --> |"Troca informações"| External
