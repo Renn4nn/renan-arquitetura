@@ -32,6 +32,8 @@ Repositório destinado às atividades, exemplos e exercícios da disciplina de *
 
 #### [Pasta da aula](./aula-3/)
 
+## [Atividade](./aula-3/exercicio.md)
+
 ---
 
 ## 👨‍🎓 Informações
