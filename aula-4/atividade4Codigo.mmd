@@ -1,0 +1,55 @@
+classDiagram
+    namespace Apresentacao {
+        class PedidoController {
+            +registrarPedido(dto: PedidoDTO) Resposta
+        }
+    }
+
+    namespace Aplicacao {
+        class RegistrarPedidoUseCase {
+            +registrar(dados: PedidoDTO) Pedido
+        }
+    }
+
+    namespace Dominio {
+        class Pedido {
+            -id: String
+            -itens: List~ItemPedido~
+            -valorTotal: Decimal
+            +calcularTotal() Decimal
+            +validarItens() Boolean
+        }
+        class Estoque {
+            -produtoId: String
+            -quantidade: Integer
+            +darBaixa(qtd: Integer) Boolean
+            +registrarEntrada(qtd: Integer) Void
+        }
+        class IPedidoRepository {
+            <<interface>>
+            +salvar(pedido: Pedido) Void
+        }
+        class IEstoqueRepository {
+            <<interface>>
+            +buscarPorProdutoId(id: String) Estoque
+            +atualizar(estoque: Estoque) Void
+        }
+    }
+
+    namespace Infraestrutura {
+        class PedidoRepositoryImpl {
+            +salvar(pedido: Pedido) Void
+        }
+        class EstoqueRepositoryImpl {
+            +buscarPorProdutoId(id: String) Estoque
+            +atualizar(estoque: Estoque) Void
+        }
+    }
+
+    PedidoController --> RegistrarPedidoUseCase
+    RegistrarPedidoUseCase --> Pedido
+    RegistrarPedidoUseCase --> IPedidoRepository
+    RegistrarPedidoUseCase --> IEstoqueRepository
+    IPedidoRepository <|.. PedidoRepositoryImpl
+    IEstoqueRepository <|.. EstoqueRepositoryImpl
+    Pedido ..> Estoque : solicita baixa

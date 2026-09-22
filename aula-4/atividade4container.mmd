@@ -1,0 +1,19 @@
+graph TB
+    subgraph Atores["Usuários do Sistema"]
+        Vendedor["Vendedor"]
+        Admin["Administrador"]
+        Estoquista["Responsável pelo Estoque"]
+    end
+
+    subgraph Sistema["Plataforma de Vendas e Inventário"]
+        WebApp["Portal Web / Mobile<br/>(Interface para os usuários)"]
+        APIBackend["Serviço de Aplicação<br/>(API REST)"]
+        Database[("Banco de Dados Relacional<br/>(Pedidos, produtos e estoque)")]
+    end
+
+    Vendedor -->|Registra pedidos de venda| WebApp
+    Admin -->|Administra o catálogo| WebApp
+    Estoquista -->|Lança movimentações| WebApp
+
+    WebApp -->|Envia requisições REST / JSON| APIBackend
+    APIBackend -->|Consulta e grava os dados| Database

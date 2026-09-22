@@ -1,0 +1,25 @@
+# Atividade - Plataforma de Vendas e Inventário (Modelo C4 - Aula 4)
+
+Este documento contém os 4 níveis do Modelo C4 desenvolvidos em linguagem **Mermaid** (sem ícones e utilizando `subgraph`), prontos para uso e visualização no VS Code.
+
+---
+
+## 1. Diagrama C4 - Nível 1: Contexto
+
+Apresenta os atores do sistema (Vendedor, Administrador e Equipe de Estoque) e a fronteira do sistema principal.
+
+```mermaid
+graph TB
+    subgraph Atores["Usuários do Sistema"]
+        Vendedor["Vendedor<br/>(Registra vendas presenciais ou por telefone)"]
+        Admin["Administrador<br/>(Mantém o catálogo de produtos)"]
+        Estoquista["Responsável pelo estoque<br/>(Lança entradas e saídas)"]
+    end
+
+    subgraph SistemaBoundary["Fronteira do Sistema"]
+        SistemaVendas["Plataforma de Vendas e Inventário<br/>(Processa pedidos, catálogo e saldos)"]
+    end
+
+    Vendedor -->|Consulta produtos e registra pedidos| SistemaVendas
+    Admin -->|Cadastra e remove produtos| SistemaVendas
+    Estoquista -->|Registra entradas e baixa itens vendidos| SistemaVendas

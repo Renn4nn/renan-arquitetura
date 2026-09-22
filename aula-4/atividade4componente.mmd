@@ -1,0 +1,68 @@
+graph TB
+    subgraph APIBackend["Serviço de Aplicação - Componentes Internos"]
+
+        %% 1. CAMADA DE APRESENTAÇÃO
+        subgraph Camada_Apresentacao["1. Camada de Apresentação (Controllers / APIs)"]
+            direction LR
+            PedidoController["PedidoController<br/>(Recebe pedidos de venda)"]
+            ProdutoController["ProdutoController<br/>(Recebe alterações do catálogo)"]
+            EstoqueController["EstoqueController<br/>(Recebe movimentações)"]
+        end
+
+        %% 2. CAMADA DE APLICAÇÃO
+        subgraph Camada_Aplicacao["2. Camada de Aplicação (Use Cases / Services)"]
+            direction LR
+            UC_Pedido["RegistrarPedidoUseCase<br/>(Coordena a criação do pedido)"]
+            UC_Produto["GerenciarProdutoUseCase<br/>(Coordena o catálogo)"]
+            UC_Estoque["MovimentarEstoqueUseCase<br/>(Coordena entradas e saídas)"]
+        end
+
+        %% 3. CAMADA DE DOMÍNIO
+        subgraph Camada_Dominio["3. Camada de Domínio (Entities & Regras)"]
+            direction LR
+            Dom_Pedido["Entidade Pedido<br/>(Calcula total e valida itens)"]
+            Dom_Produto["Entidade Produto<br/>(Aplica regras do catálogo)"]
+            Dom_Estoque["Entidade Estoque<br/>(Mantém o saldo disponível)"]
+        end
+
+        %% 4. CAMADA DE DADOS
+        subgraph Camada_Dados["4. Camada de Dados e Infraestrutura (Repositories)"]
+            direction LR
+            Repo_Pedido["PedidoRepository<br/>(Interface / Acesso a Dados)"]
+            Repo_Produto["ProdutoRepository<br/>(Interface / Acesso a Dados)"]
+            Repo_Estoque["EstoqueRepository<br/>(Interface / Acesso a Dados)"]
+        end
+
+    end
+
+    subgraph InfraestruturaExterna["Infraestrutura Externa"]
+        Database[("Banco de Dados Relacional<br/>(PostgreSQL / MySQL)")]
+    end
+
+    %% FLUXO ENTRE COMPONENTES
+
+    %% Controller -> UseCase
+    PedidoController --> UC_Pedido
+    ProdutoController --> UC_Produto
+    EstoqueController --> UC_Estoque
+
+    %% UseCase -> Domain & Repositories
+    UC_Pedido --> Dom_Pedido
+    UC_Pedido --> UC_Estoque
+    UC_Produto --> Dom_Produto
+    UC_Estoque --> Dom_Estoque
+
+    UC_Pedido --> Repo_Pedido
+    UC_Produto --> Repo_Produto
+    UC_Estoque --> Repo_Estoque
+
+    %% Repositories -> DB
+    Repo_Pedido --> Database
+    Repo_Produto --> Database
+    Repo_Estoque --> Database
+
+    %% ESTILIZAÇÃO
+    style Camada_Apresentacao fill:#e3f2fd,stroke:#1565c0,stroke-width:2px
+    style Camada_Aplicacao fill:#fff3e0,stroke:#ef6c00,stroke-width:2px
+    style Camada_Dominio fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px
+    style Camada_Dados fill:#f3e5f5,stroke:#6a1b9a,stroke-width:2px
