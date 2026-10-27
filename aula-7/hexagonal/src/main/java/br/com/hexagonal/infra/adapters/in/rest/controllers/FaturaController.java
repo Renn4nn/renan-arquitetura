@@ -1,4 +1,3 @@
-
 package br.com.hexagonal.infra.adapters.in.rest.controllers;
 
 import java.util.UUID;
@@ -9,11 +8,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.hexagonal.domain.in.FaturaService;
+import br.com.hexagonal.domain.ports.in.FaturaService;
+import br.com.hexagonal.infra.adapters.in.rest.dtos.FaturaPostRequest;
+import br.com.hexagonal.infra.adapters.in.rest.dtos.FaturaPostResponse;
 import lombok.RequiredArgsConstructor;
 
+@RestController 
 @RequestMapping("/fatura")
-@RestController
 @RequiredArgsConstructor
 public class FaturaController {
 
@@ -21,14 +22,10 @@ public class FaturaController {
 
   @PostMapping
   public ResponseEntity<FaturaPostResponse> post(
-      @RequestBody FaturaPostRequest faturaPostRequest) {
-
-    UUID faturaId = faturaService.faturaPedido(
-        faturaPostRequest.pedidoId(),
-        faturaPostRequest.valor());
-
-    FaturaPostResponse response = new FaturaPostResponse(faturaId);
-
-    return ResponseEntity.status(201).body(response);
-  }
+    @RequestBody FaturaPostRequest faturaPostRequest) {
+      UUID faturaId = faturaService.faturarPedido(
+        faturaPostRequest.pedidoId(), faturaPostRequest.valor());
+      return ResponseEntity.status(201).body(new FaturaPostResponse(faturaId.toString()));
+    }
+  
 }

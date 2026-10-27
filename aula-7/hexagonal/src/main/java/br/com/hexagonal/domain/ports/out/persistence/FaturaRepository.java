@@ -1,4 +1,4 @@
-package br.com.hexagonal.domain.out.persistence;
+package br.com.hexagonal.domain.ports.out.persistence;
 
 import br.com.hexagonal.domain.entities.Fatura;
 

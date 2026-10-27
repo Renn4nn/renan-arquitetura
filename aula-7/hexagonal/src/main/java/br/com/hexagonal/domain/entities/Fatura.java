@@ -17,15 +17,16 @@ public class Fatura {
   private String rps;
   private String hashEmail;
 
-  @Builder
+  @Builder 
   private Fatura(
-      UUID id,
-      Long pedidoId,
-      BigDecimal valor,
-      LocalDateTime emitidoEm,
-      String codigoBarras,
-      String rps,
-      String hashEmail) {
+    UUID id,
+    Long pedidoId,
+    BigDecimal valor,
+    LocalDateTime emitidoEm,
+    String codigoBarras,
+    String rps,
+    String hashEmail
+  ) {
 
     if (pedidoId == null || pedidoId <= 0) {
       throw new RuntimeException("A fatura precisa de um pedido!");
@@ -35,25 +36,26 @@ public class Fatura {
       throw new RuntimeException("O valor da fatura deve ser maior que zero!");
     }
 
-    this.id = id;
-    this.pedidoId = pedidoId;
-    this.valor = valor;
-    this.emitidoEm = emitidoEm;
-    this.codigoBarras = codigoBarras;
-    this.rps = rps;
+    this.id = id; 
+    this.pedidoId = pedidoId; 
+    this.valor = valor; 
+    this.emitidoEm = emitidoEm; 
+    this.codigoBarras = codigoBarras; 
+    this.rps = rps; 
     this.hashEmail = hashEmail;
   }
 
   public static Fatura criar(Long pedidoId, BigDecimal valor) {
     return Fatura.builder()
-        .id(UUID.randomUUID())
-        .pedidoId(pedidoId)
-        .valor(valor)
-        .build();
+      .id(UUID.randomUUID())
+      .pedidoId(pedidoId)
+      .valor(valor)
+      .build();
   }
 
   public void inserirBoleto(String codigoBarras) {
-    // REGRA DE NEGOCIO DO BOLETO
+    //REGRA DE NEGÓCIO DO BOLETO
     this.codigoBarras = codigoBarras;
   }
+
 }
