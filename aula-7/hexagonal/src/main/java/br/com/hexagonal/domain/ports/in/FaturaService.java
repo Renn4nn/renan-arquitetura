@@ -4,5 +4,5 @@ import java.math.BigDecimal;
 import java.util.UUID;
 
 public interface FaturaService {
-  UUID faturarPedido(Long pedidoId, BigDecimal valor);
+  UUID faturarPedido(Long pedidoId, BigDecimal valor, String emailCliente);
 }

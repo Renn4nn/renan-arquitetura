@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th=""http://www.thymeleaf.org>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <title>Home</title>
+</head>
+<body>
+    <header>
+        <h1>
+            Sistema de gestão Dunder Mifflin
+        </h1>
+    </header>
+    <main>
+        <nav>
+            <ul>
+                <li><a th:href="@{/products}">Produtos</a></li>
+                <li><a th:href="@{/sales}">Vendas</a></li>
+                <li><a th:href="@{/stock}">Estoque</a></li>
+            </ul>
+        </nav>
+    </main>
+    <footer>
+        Projeto de compreensão do MVC
+    </footer>
+</body>
+</html>

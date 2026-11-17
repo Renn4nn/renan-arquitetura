@@ -31,6 +31,9 @@ public class FaturaEntityJpa {
   
   @Column(name = "valor")
   private BigDecimal valor;
+
+  @Column(name = "email_cliente")
+  private String emailCliente;
   
   @Column(name = "emitido_em")
   private LocalDateTime emitidoEm;
@@ -38,8 +41,8 @@ public class FaturaEntityJpa {
   @Column(name = "codigo_barras")
   private String codigoBarras;
   
-  @Column(name = "rps")
-  private String rps;
+  @Column(name = "chave_acesso")
+  private String chaveAcesso;
   
   @Column(name = "hash_email")
   private String hashEmail;
@@ -49,9 +52,10 @@ public class FaturaEntityJpa {
       .id(fatura.getId())
       .pedidoId(fatura.getPedidoId())
       .valor(fatura.getValor())
+      .emailCliente(fatura.getEmailCliente())
       .emitidoEm(fatura.getEmitidoEm())
       .codigoBarras(fatura.getCodigoBarras())
-      .rps(fatura.getRps())
+      .chaveAcesso(fatura.getChaveAcesso())
       .hashEmail(fatura.getHashEmail())
       .build();
   }

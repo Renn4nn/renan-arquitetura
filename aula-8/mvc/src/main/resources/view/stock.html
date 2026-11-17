@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <title>Estoque</title>
+</head>
+<body>
+<header><h1>Estoque</h1><a th:href="@{/}">Início</a></header>
+<main>
+    <section>
+        <h2>Movimentar estoque</h2>
+        <form th:action="@{/stock}" method="post">
+            <div><label for="productId">Produto</label>
+                <select id="productId" name="productId" required>
+                    <option th:each="product : ${products}"
+                            th:if="${product.status.name() != 'DESCONTINUADO'}"
+                            th:value="${product.id}"
+                            th:text="${product.name + ' (' + product.status + ')'}"></option>
+                </select>
+            </div>
+            <div><label for="quantity">Quantidade</label>
+                <input id="quantity" name="quantity" type="number" min="1" required></div>
+            <div><label for="operation">Operação</label>
+                <select id="operation" name="operation">
+                    <option value="entrada">Entrada</option>
+                    <option value="saida">Saída</option>
+                </select>
+            </div>
+            <button type="submit">Registrar</button>
+        </form>
+    </section>
+    <section>
+        <h2>Saldos</h2>
+        <table><thead><tr><th>Produto ID</th><th>Quantidade</th></tr></thead>
+            <tbody><tr th:each="stock : ${stocks}">
+                <td th:text="${stock.productId}"></td><td th:text="${stock.quantity}"></td>
+            </tr></tbody>
+        </table>
+    </section>
+</main>
+</body>
+</html>

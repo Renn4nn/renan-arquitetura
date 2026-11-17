@@ -1,0 +1,22 @@
+sequenceDiagram
+    actor Estoquista
+    participant Tela as StockController
+    participant Servico as StockService
+    participant Produtos as ProductRepository
+    participant Estoque as StockRepository
+    Estoquista->>Tela: POST /stock (produto, quantidade, entrada)
+    Tela->>Servico: move(produto, quantidade, entrada)
+    Servico->>Produtos: findById(produto)
+    Produtos-->>Servico: Product
+    alt descontinuado ou quantidade inválida
+        Servico-->>Tela: erro
+        Tela-->>Estoquista: mensagem de erro
+    else permitido
+        Servico->>Estoque: findById(produto)
+        Estoque-->>Servico: saldo (ou zero)
+        Servico->>Servico: soma quantidade; status = DISPONIVEL
+        Servico->>Estoque: save(saldo)
+        Servico->>Produtos: save(produto)
+        Servico-->>Tela: concluído
+        Tela-->>Estoquista: redirect /stock
+    end

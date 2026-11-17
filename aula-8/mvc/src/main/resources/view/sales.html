@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <title>Vendas</title>
+</head>
+<body>
+<header><h1>Vendas</h1><a th:href="@{/}">Início</a></header>
+<main>
+    <section>
+        <h2>Novo pedido</h2>
+        <form th:action="@{/sales}" method="post">
+            <div><label for="productId">Produto</label>
+                <select id="productId" name="productId" required>
+                    <option th:each="product : ${products}"
+                            th:if="${product.status.name() == 'DISPONIVEL'}"
+                            th:value="${product.id}"
+                            th:text="${product.name + ' — R$ ' + product.preco}"></option>
+                </select>
+            </div>
+            <div><label for="quantity">Quantidade</label>
+                <input id="quantity" name="quantity" type="number" min="1" required></div>
+            <div><label for="emailCliente">E-mail do cliente</label>
+                <input id="emailCliente" name="emailCliente" type="email" required></div>
+            <button type="submit">Criar pedido</button>
+        </form>
+    </section>
+    <section>
+        <h2>Pedidos</h2>
+        <table><thead><tr><th>ID</th><th>Produto</th><th>Qtd.</th><th>Total</th><th>Status</th><th>Fatura</th><th>Ação</th></tr></thead>
+            <tbody><tr th:each="pedido : ${pedidos}">
+                <td th:text="${pedido.id}"></td>
+                <td th:text="${pedido.product.name}"></td>
+                <td th:text="${pedido.quantity}"></td>
+                <td th:text="${pedido.total}"></td>
+                <td th:text="${pedido.status}"></td>
+                <td th:text="${pedido.faturaId ?: '—'}"></td>
+                <td><form th:if="${pedido.status.name() == 'ABERTO'}"
+                          th:action="@{/sales/{id}/close(id=${pedido.id})}" method="post">
+                    <button type="submit">Fechar e faturar</button>
+                </form></td>
+            </tr></tbody>
+        </table>
+    </section>
+</main>
+</body>
+</html>

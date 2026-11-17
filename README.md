@@ -2,7 +2,7 @@
 
 Repositório das atividades da disciplina de Arquitetura de Software.
 
-## Atividades
+## Primeiro bimestre — Aulas 2 a 5
 
 ### Aula 2 — Modelo C4
 
@@ -44,6 +44,23 @@ Aplicação MVC desenvolvida com Spring MVC:
 - [Repository de produtos](./aula-5/mvc/src/main/java/br/com/mvc/model/repository/ProductRepository.java)
 - [Service de produtos](./aula-5/mvc/src/main/java/br/com/mvc/model/service/ProductService.java)
 - [Views](./aula-5/mvc/src/main/resources/view/)
+
+## Segundo bimestre — Aulas 6 a 8
+
+### Aula 6 — Estoque e diagramas dinâmicos
+
+- [Projeto MVC com estoque](./aula-6/mvc/)
+- [Diagramas de sequência, atividade e estados](./aula-6/diagramas/)
+
+### Aula 7 — Hub hexagonal
+
+- [Hub de faturamento](./aula-7/hexagonal/)
+- [Instruções e contrato REST](./aula-7/README.md)
+
+### Aula 8 — Integração entre vendas e faturamento
+
+- [Projeto MVC integrado ao hub](./aula-8/mvc/)
+- [Análise dos problemas de integração](./aula-8/analise.md)
 
 ## Informações
 

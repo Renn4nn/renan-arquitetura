@@ -1,0 +1,16 @@
+flowchart TD
+    Inicio((Início)) --> A[Receber produto e quantidade]
+    A --> B{Quantidade positiva?}
+    B -- não --> Erro[Recusar operação]
+    B -- sim --> C{Produto existe e não está descontinuado?}
+    C -- não --> Erro
+    C -- sim --> D{Saldo suficiente?}
+    D -- não --> Erro
+    D -- sim --> E[Subtrair quantidade]
+    E --> F{Saldo zerou?}
+    F -- sim --> G[Marcar INDISPONIVEL]
+    F -- não --> H[Manter DISPONIVEL]
+    G --> I[Salvar saldo e produto na mesma transação]
+    H --> I
+    I --> Fim((Fim))
+    Erro --> Fim
